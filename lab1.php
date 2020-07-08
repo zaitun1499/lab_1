@@ -1,5 +1,3 @@
-
-
 <?php
 include_once 'dbConn.php';
 include_once 'user.php';
@@ -10,10 +8,9 @@ if(isset($_POST['submit']))
 {
 	$first_name=$_POST['fname'];
 	$last_name=$_POST['lname'];
-	$email=$_POST['email'];
-	$password=$_POST['password'];
+	$city=$_POST['city_name'];
 
-	$user= new User($first_name,$last_name,$email,$password);
+	$user= new User($first_name,$last_name,$city);
 	$res=$user->submit();
 	if($res){
 		echo"Successful at saving";
@@ -40,12 +37,8 @@ if(isset($_POST['submit']))
 				<input type="text" style="height:20px; width:300px;" id="fname" name="fname"><br></br>
 				<label for="lname">Last Name:</label><br>
 				<input type="text" style="height:20px; width:300px;" id="lname" name="lname"><br></br>
-				<label for="email">Email:</label><br>
-				<input type="email" style="height:20px; width:300px;" id="email" name="email"><br></br>
-				<label for="password">Password:</label><br>
-				<input type="password" style="height:20px; width:300px;" id="password" name="password"><br>
-
-				<br>
+				<label for="cname">City Name:</label><br>
+				<input type="text" name="city_name" placeholder="city"><br></br>
 			    <input type="submit" value="Sign up">
 		      
 		</form>
