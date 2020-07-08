@@ -37,6 +37,7 @@ if(isset($_POST['submit']))
  <head>
 	<header> <h2>Sign Up</h2></header>
 	<script type="text/javascript" src="validate.js"></script>
+	<link rel="stylesheet" type="text/css" href="validate.css">
  </head>
 	<body>
 		<form action="lab1.php" name="user_details"method="post" onsubmit="return validateForm()">
