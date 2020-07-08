@@ -53,12 +53,17 @@ if(isset($_POST['submit']))
 			</div>
 			  
 				<label for="fname">First Name:</label><br>
-				<input type="text" style="height:20px; width:300px;" id="fname" required placeholder="First Name" name="fname"><br></br>
+				<input type="text" style="height:20px; width:300px;" id="fname" placeholder="First Name" name="fname" required/><br></br>
 				<label for="lname">Last Name:</label><br>
 				<input type="text" style="height:20px; width:300px;" id="lname" placeholder="Last Name" name="lname"><br></br>
 				<label for="cname">City Name:</label><br>
 				<input type="text" style="height:20px; width:300px;" name="city_name" placeholder="city"><br></br>
-			    <input type="submit" value="Sign up">
+				<label for='uname'> User Name:</label><br>
+				<input type="text" name="username" style="height:20px; width:300px;" placeholder="password"><br></br>
+				<label>Password:</label><br>
+				<input type="Password" style="height:20px; width:300px;" name="password" placeholder="password"><br></br>
+			    <input type="submit" name='submit' value="Sign up"><br></br>
+			    <a href="login.php">Login</a>
 		      
 		</form>
 

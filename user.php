@@ -1,16 +1,44 @@
-<<?php 
-include "Crud.php"
-class User implements Crud{
+<?php 
+include "Crud.php";
+include "authenticator.php";
+class User implements Crud, Authenticator{
 	private $user_id;
 	private $first_name;
 	private $last_name;
 	private $city_name;
+	private $username;
+	private $password;
 
 	function __construct($first_name,$last_name,$city_name){
 		$this->first_name= $first_name;
 		$this->last_name= $last_name;
-		$this->city_name= $city_name;
+		$this->city_name= $city_name
+		$this->username= $username;
+		$this->password= $password;
 
+
+	}
+
+	public static function create(){
+		$instance = new self();
+		return $instance;
+	}
+
+	//username setter
+	public function setUsername($username){
+		$this->username=$username;
+	}
+	//username getter
+	public function getUsername(){
+		return $this->$username;
+	}
+	//password setter
+	public function setPassword(){
+		$this->password=$password;
+	}
+	//password getter
+	public function getPassword(){
+		return $this->$password;
 	}
 	//user id setter
 	public function setUserId($user_id){
@@ -29,7 +57,10 @@ class User implements Crud{
 		$fn = $this->first_name;
 		$ln = $this->last_name;
 		$city = $this->city_name;
-		$res = mysql_query("INSERT INTO user(first_name, last_name, user_city) VALUES('$fn', '$ln','$city')") or die("Error".mysql_error());
+		$uname=$this->username;
+		$this->hashpassword();
+		$pass=$this->password;
+		$res = mysql_query("INSERT INTO user(first_name, last_name, user_city) VALUES('$fn', '$ln','$city','$uname','$pass')") or die("Error".mysql_error());
 		return $res;
 	}
 
@@ -73,6 +104,40 @@ class User implements Crud{
 	public function createFormErrorSessions(){
 		session_start();
 		$_SESSION['form_errors']="All fields are required";
+	}
+
+	public function hashpassword(){
+		//inbuilt function password_hash hashes out passwords
+		$this->password=password_hash($this->password, PASSWORD_DEFAULT);
+	}
+	public function isPasswordCorrect(){
+		$con = new dbConnector;
+		$found=false;
+		$res = mysql_query("SELECT*FROM user") or die ("Error".mysql_error());
+
+		while($row=mysql_fetch_array($res)){
+			if(password_verify($this->getPassword(),$row['password'])&& $this->getUsername()==$row['username']){
+				$found = true;
+			}
+		}
+		$connection->closeDB();
+		return $found;
+
+	}
+	public function login(){
+		if($this->isPasswordCorrect()){
+			header("Location:private_page.php");
+		}
+	}
+	public function createUserSession(){
+		session_start();
+		$_SESSION['username']=$this->getUsername();
+	}
+	public function logout(){
+		session_start();
+		unset($_SESSION['username']);
+		session_destroy();
+		header("location:lab1.php");
 	}
 	
 }
