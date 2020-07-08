@@ -58,6 +58,22 @@ class User implements Crud{
 		return null;
 	}
 
+	public function validateForm()
+	{
+		//returns true if there is no empty value
+		$fn = $this->first_name;
+		$ln = $this->last_name;
+		$city = $this->city_name;
+
+		if($fn==""||$ln==""||$city==""){
+			return false;
+		}
+		return true;
+	}
+	public function createFormErrorSessions(){
+		session_start();
+		$_SESSION['form_errors']="All fields are required";
+	}
 	
 }
 
