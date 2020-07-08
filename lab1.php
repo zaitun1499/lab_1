@@ -62,6 +62,8 @@ if(isset($_POST['submit']))
 				<input type="text" name="username" style="height:20px; width:300px;" placeholder="password"><br></br>
 				<label>Password:</label><br>
 				<input type="Password" style="height:20px; width:300px;" name="password" placeholder="password"><br></br>
+				<label>Profile Image:</label><br>
+				<input type="file" name="fileToUpload" id="fileToUpload">
 			    <input type="submit" name='submit' value="Sign up"><br></br>
 			    <a href="login.php">Login</a>
 		      
