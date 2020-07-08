@@ -10,7 +10,22 @@ if(isset($_POST['submit']))
 	$last_name=$_POST['lname'];
 	$city=$_POST['city_name'];
 
-	$user= new User($first_name,$last_name,$city);
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
+	$utc_timestamp=$_POST['utc_timestamp'];
+	$offset = $_POST['time_zone_offset'];
+
+	$user= new User($first_name,$last_name,$city, $username, $password);
+	/*$uploader = new FileUploader;
+	if(!$user->validateForm()){
+		$user->createFormErrorSession();
+		header("Refresh:0");
+
+		die();
+	}*/
+	$res=user->save();
+
 	if(!$user->validateform()){
 		$user->createFormErrorSession();
 		header("Refreh:0");
@@ -37,6 +52,8 @@ if(isset($_POST['submit']))
  <head>
 	<header> <h2>Sign Up</h2></header>
 	<script type="text/javascript" src="validate.js"></script>
+	<script type="text/javascript" src="timezone.js"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
 	<link rel="stylesheet" type="text/css" href="validate.css">
  </head>
 	<body>
@@ -65,6 +82,8 @@ if(isset($_POST['submit']))
 				<label>Profile Image:</label><br>
 				<input type="file" name="fileToUpload" id="fileToUpload">
 			    <input type="submit" name='submit' value="Sign up"><br></br>
+			    <input type="hidden" name="utc_timestamp" id="utc_timestamp" value=""/>
+			    <input type="hidden" name="time_zone_offset" value=""/>
 			    <a href="login.php">Login</a>
 		      
 		</form>
