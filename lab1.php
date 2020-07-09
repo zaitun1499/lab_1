@@ -28,7 +28,7 @@ if(isset($_POST['submit']))
 
 	if(!$user->validateform()){
 		$user->createFormErrorSession();
-		header("Refreh:0");
+		header("Refresh:0");
 		die();
 	}
 	$res=$user->submit();
@@ -70,7 +70,7 @@ if(isset($_POST['submit']))
 			</div>
 			  
 				<label for="fname">First Name:</label><br>
-				<input type="text" style="height:20px; width:300px;" id="fname" placeholder="First Name" name="fname" required/><br></br>
+				<input type="text" style="height:20px; width:300px;" id="fname" placeholder="First Name" name="fname" required=""><br></br>
 				<label for="lname">Last Name:</label><br>
 				<input type="text" style="height:20px; width:300px;" id="lname" placeholder="Last Name" name="lname"><br></br>
 				<label for="cname">City Name:</label><br>
